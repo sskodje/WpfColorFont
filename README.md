@@ -1,4 +1,4 @@
-# WpfColorFont
+# Wpf Color/Font Dialog
 
 A wpf color and font picker based on [a project by Alessio Saltarin](http://www.codeproject.com/Articles/368070/A-WPF-Font-Picker-with-Color).
 
