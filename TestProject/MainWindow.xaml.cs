@@ -30,6 +30,7 @@ namespace TestProject
             ColorFontDialog dialog = new ColorFontDialog();
             dialog.Owner = this;
             dialog.Font = FontInfo.GetControlFont(this.TextBlockSample);
+            
             if (dialog.ShowDialog() == true)
             {
                 FontInfo font = dialog.Font;

@@ -7,6 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
              Height="332"
+                 x:Name="ColorFontChooserControl"
              xmlns:local="clr-namespace:WpfColorFontDialog"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:sysCollection="clr-namespace:System.Collections;assembly=mscorlib">
@@ -15,7 +16,12 @@
             <DataTemplate x:Key="fontFamilyData">
                 <TextBlock TextBlock.FontSize="16"
                            Text="{Binding Source}"
-                           TextBlock.FontFamily="{Binding}" />
+                           TextBlock.FontFamily="{Binding}"
+                           ToolTip="{Binding Source}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="fontFamilyDataWithoutPreview">
+                <TextBlock Text="{Binding Source}"
+                           ToolTip="{Binding Source}" />
             </DataTemplate>
             <DataTemplate x:Key="{DataTemplateKey {x:Type FamilyTypeface}}"
                           DataType="{x:Type FamilyTypeface}">

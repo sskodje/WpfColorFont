@@ -32,9 +32,10 @@ namespace WpfColorFontDialog
                 this.selectedFont = value;
             }
         }
-        public ColorFontDialog()
+        public ColorFontDialog(bool previewFontInFontList=true)
         {
             InitializeComponent();
+            this.colorFontChooser.PreviewFontInFontList = previewFontInFontList;
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)

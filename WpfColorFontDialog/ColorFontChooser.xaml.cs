@@ -26,9 +26,32 @@ namespace WpfColorFontDialog
                 return new FontInfo(this.txtSampleText.FontFamily, this.txtSampleText.FontSize, this.txtSampleText.FontStyle, this.txtSampleText.FontStretch, this.txtSampleText.FontWeight, this.colorPicker.SelectedColor.Brush);
             }
         }
+
+
+        public bool PreviewFontInFontList
+        {
+            get { return (bool)GetValue(PreviewFontInFontListProperty); }
+            set { SetValue(PreviewFontInFontListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PreviewFontInFontList.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PreviewFontInFontListProperty =
+            DependencyProperty.Register("PreviewFontInFontList", typeof(bool), typeof(ColorFontChooser), new PropertyMetadata(true, PreviewFontInFontListPropertyCallback));
+
+
         public ColorFontChooser()
         {
             InitializeComponent();
+        }
+        private static void PreviewFontInFontListPropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ColorFontChooser chooser = d as ColorFontChooser;
+            if (e.NewValue == null)
+                return;
+            if ((bool)e.NewValue == true)
+                chooser.lstFamily.ItemTemplate = chooser.Resources["fontFamilyData"] as DataTemplate;
+            else
+                chooser.lstFamily.ItemTemplate = chooser.Resources["fontFamilyDataWithoutPreview"] as DataTemplate;
         }
         private void colorPicker_ColorChanged(object sender, RoutedEventArgs e)
         {
