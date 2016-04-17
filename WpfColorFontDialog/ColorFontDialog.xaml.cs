@@ -55,14 +55,20 @@ namespace WpfColorFontDialog
         private void SyncFontName()
         {
             string fontFamilyName = this.selectedFont.Family.Source;
+            bool foundMatch=false;
             int idx = 0;
             foreach (object item in (IEnumerable)this.colorFontChooser.lstFamily.Items)
             {
                 if (fontFamilyName == item.ToString())
                 {
+                    foundMatch = true;
                     break;
                 }
                 idx++;
+            }
+            if(!foundMatch)
+            {
+                idx = 0;
             }
             this.colorFontChooser.lstFamily.SelectedIndex = idx;
             this.colorFontChooser.lstFamily.ScrollIntoView(this.colorFontChooser.lstFamily.Items[idx]);

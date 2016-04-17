@@ -6,30 +6,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d"
-             MinHeight="32"
-             MinWidth="100"
              xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <Grid>
         <ComboBox Name="superCombo"
+               
                   IsSynchronizedWithCurrentItem="True"
-                  VerticalAlignment="Center"
                   ItemsSource="{Binding Path=FontColors}"
                   SelectedValue="{Binding Path=SelectedFontColor}"
                   DropDownClosed="superCombo_DropDownClosed"
                   Loaded="superCombo_Loaded">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Stretch">
-                        <TextBlock Width="20"
-                                   Height="20"
-                                   Margin="2"
-                                   VerticalAlignment="Stretch"
-                                   Background="{Binding Name}" />
+                    <Grid Width="{Binding ElementName=superCombo,Path=ActualWidth}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.15*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Rectangle Margin="2,2,5,2"
+                                   x:Name="ColorRect"
+                                   VerticalAlignment="Center"
+                                   Fill="{Binding Name}"
+                                   Height="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource Self}}" />
                         <TextBlock Margin="2"
-                                   VerticalAlignment="Stretch"
+                                   Grid.Column="1"
+                                   VerticalAlignment="Center"
                                    Text="{Binding Name}" />
-                    </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
