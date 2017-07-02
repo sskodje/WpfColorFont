@@ -10,8 +10,11 @@ usage:
             Bool previewFontInFontList = true;
             //True to allow user to input arbitrary font sizes. False to only allow predtermined sizes
             Bool allowArbitraryFontSizes = true; 
+            
+            
             ColorFontDialog dialog = new ColorFontDialog(previewFontInFontList,allowArbitraryFontSizes);
             dialog.Font = FontInfo.GetControlFont(MyTextBox);
+            
             //Optional custom allowed size range
             dialog.FontSizes = new int[] { 10, 12, 14, 16, 18, 20, 22 };
             
