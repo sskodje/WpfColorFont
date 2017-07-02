@@ -13,9 +13,17 @@ namespace WpfColorFontDialog
 
 		object System.Windows.Data.IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			ListBoxItem item = value as ListBoxItem;
-			return double.Parse(item.Content.ToString());
-		}
+            string str = value.ToString();
+            try
+            {
+                return double.Parse(value.ToString());
+            }
+            catch(FormatException ex)
+            {
+                return 0;
+            }
+
+        }
 
 		object System.Windows.Data.IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{

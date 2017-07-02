@@ -27,10 +27,10 @@ namespace TestProject
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ColorFontDialog dialog = new ColorFontDialog();
+            ColorFontDialog dialog = new ColorFontDialog(true,true);
             dialog.Owner = this;
             dialog.Font = FontInfo.GetControlFont(this.TextBlockSample);
-            
+            //dialog.FontSizes = new int[] { 10, 12, 14, 16, 18 };
             if (dialog.ShowDialog() == true)
             {
                 FontInfo font = dialog.Font;

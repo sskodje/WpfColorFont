@@ -28,6 +28,18 @@ namespace WpfColorFontDialog
         }
 
 
+
+        public bool AllowArbitraryFontSizes
+        {
+            get { return (bool)GetValue(AllowArbitraryFontSizesProperty); }
+            set { SetValue(AllowArbitraryFontSizesProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AllowArbitraryFontSizes.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AllowArbitraryFontSizesProperty =
+            DependencyProperty.Register("AllowArbitraryFontSizes", typeof(bool), typeof(ColorFontChooser), new PropertyMetadata(true, AllowArbitraryFontSizesPropertyCallback));
+
+
         public bool PreviewFontInFontList
         {
             get { return (bool)GetValue(PreviewFontInFontListProperty); }
@@ -53,9 +65,77 @@ namespace WpfColorFontDialog
             else
                 chooser.lstFamily.ItemTemplate = chooser.Resources["fontFamilyDataWithoutPreview"] as DataTemplate;
         }
+        private static void AllowArbitraryFontSizesPropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ColorFontChooser chooser = d as ColorFontChooser;
+            if (e.NewValue == null)
+                return;
+            if ((bool)e.NewValue == true)
+                chooser.tbFontSize.IsEnabled = true;
+            else
+                chooser.tbFontSize.IsEnabled = false;
+        }
         private void colorPicker_ColorChanged(object sender, RoutedEventArgs e)
         {
             this.txtSampleText.Foreground = this.colorPicker.SelectedColor.Brush;
+        }
+
+        private void lstFontSizes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.tbFontSize != null && this.lstFontSizes.SelectedItem != null)
+            {
+                this.tbFontSize.Text = this.lstFontSizes.SelectedItem.ToString();
+            }
+        }
+
+        private void tbFontSize_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !TextBoxTextAllowed(e.Text);
+        }
+
+        private void tbFontSize_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String Text1 = (String)e.DataObject.GetData(typeof(String));
+                if (!TextBoxTextAllowed(Text1)) e.CancelCommand();
+            }
+            else
+            {
+                e.CancelCommand();
+            }
+        }
+        private Boolean TextBoxTextAllowed(String Text2)
+        {
+            return Array.TrueForAll<Char>(Text2.ToCharArray(),
+                delegate (Char c) { return Char.IsDigit(c) || Char.IsControl(c); });
+        }
+
+        private void tbFontSize_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (tbFontSize.Text.Length == 0)
+            {
+                if (this.lstFontSizes.SelectedItem == null)
+                {
+                    lstFontSizes.SelectedIndex = 0;
+                }
+                tbFontSize.Text = this.lstFontSizes.SelectedItem.ToString();
+
+            }
+        }
+
+        private void tbFontSize_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            foreach (int size in this.lstFontSizes.Items)
+            {
+                if (size.ToString() == tbFontSize.Text)
+                {
+                    lstFontSizes.SelectedItem = size;
+                    lstFontSizes.ScrollIntoView(size);
+                    return;
+                }
+            }
+            this.lstFontSizes.SelectedItem = null;
         }
     }
 }

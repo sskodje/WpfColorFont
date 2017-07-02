@@ -3,13 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cf="clr-namespace:WpfColorFontDialog;assembly=WpfColorFontDialog"
         Title="MainWindow"
-        Height="120"
+        Height="200"
         Width="450">
     <Grid>
         <StackPanel
 >
             <TextBox Text="The quick brown fox jumps over the lazy dog "
                      x:Name="TextBlockSample"
+                     FontSize="12"
+                     FontStyle="Italic"
+                     FontWeight="SemiBold"
                      Margin="10,0"/>
             <Button Content="Select Font"
                     HorizontalAlignment="Left"

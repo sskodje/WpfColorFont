@@ -92,28 +92,27 @@
                 <GroupBox.Header>
                     <TextBlock Text="Font Size" />
                 </GroupBox.Header>
-                <ListBox Name="lstFontSizes"
-                         Margin="5">
-                    <ListBoxItem Content="8" />
-                    <ListBoxItem Content="9" />
-                    <ListBoxItem Content="10"
-                                 IsSelected="True" />
-                    <ListBoxItem Content="12" />
-                    <ListBoxItem Content="14" />
-                    <ListBoxItem Content="16" />
-                    <ListBoxItem Content="18" />
-                    <ListBoxItem Content="20" />
-                    <ListBoxItem Content="22" />
-                    <ListBoxItem Content="24" />
-                    <ListBoxItem Content="26" />
-                    <ListBoxItem Content="28" />
-                    <ListBoxItem Content="36" />
-                    <ListBoxItem Content="48" />
-                    <ListBoxItem Content="72" />
-                    <ListBox.Resources>
-                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}">LightBlue</SolidColorBrush>
-                    </ListBox.Resources>
-                </ListBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListBox Name="lstFontSizes"
+                             Margin="5"
+                             SelectionChanged="lstFontSizes_SelectionChanged">
+                        <ListBox.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}">LightBlue</SolidColorBrush>
+                        </ListBox.Resources>
+                    </ListBox>
+                    <TextBox x:Name="tbFontSize"
+                             Margin="5,0,5,0"
+                             Grid.Row="1"
+                             PreviewTextInput="tbFontSize_PreviewTextInput"
+                             DataObject.Pasting="tbFontSize_Pasting"
+                             LostFocus="tbFontSize_LostFocus"
+                             TextChanged="tbFontSize_TextChanged"
+                             Text="10"/>
+                </Grid>
             </GroupBox>
             <GroupBox Grid.Row="1"
                       Grid.ColumnSpan="2"
@@ -136,7 +135,7 @@
                          FontWeight="{Binding SelectedItem.Weight, ElementName=lstTypefaces}"
                          FontStretch="{Binding SelectedItem.Stretch, ElementName=lstTypefaces}"
                          FontStyle="{Binding SelectedItem.Style, ElementName=lstTypefaces}"
-                         FontSize="{Binding SelectedItem, Converter={StaticResource FontSizeListBoxItemToDoubleConverter}, ElementName=lstFontSizes}"
+                         FontSize="{Binding Text, Converter={StaticResource FontSizeListBoxItemToDoubleConverter}, ElementName=tbFontSize}"
                          Background="{x:Null}" />
             </GroupBox>
             <GroupBox Grid.Column="1"

@@ -19,23 +19,38 @@ namespace WpfColorFontDialog
     /// </summary>
     public partial class ColorFontDialog : Window
     {
-        private FontInfo selectedFont;
+        private FontInfo _selectedFont;
 
         public FontInfo Font
         {
             get
             {
-                return this.selectedFont;
+                return _selectedFont;
             }
             set
             {
-                this.selectedFont = value;
+                _selectedFont = value;
             }
         }
-        public ColorFontDialog(bool previewFontInFontList=true)
+
+        private int[] _defaultFontSizes = { 8, 9, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72, 96 };
+        private int[] _fontSizes = null;
+        public int[] FontSizes
+        {
+            get
+            {
+                return _fontSizes??_defaultFontSizes;
+            }
+            set
+            {
+                _fontSizes = value;
+            }
+        }
+        public ColorFontDialog(bool previewFontInFontList=true, bool allowArbitraryFontSizes=true)
         {
             InitializeComponent();
             this.colorFontChooser.PreviewFontInFontList = previewFontInFontList;
+            this.colorFontChooser.AllowArbitraryFontSizes = allowArbitraryFontSizes;
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
@@ -54,7 +69,7 @@ namespace WpfColorFontDialog
 
         private void SyncFontName()
         {
-            string fontFamilyName = this.selectedFont.Family.Source;
+            string fontFamilyName = this._selectedFont.Family.Source;
             bool foundMatch=false;
             int idx = 0;
             foreach (object item in (IEnumerable)this.colorFontChooser.lstFamily.Items)
@@ -76,21 +91,14 @@ namespace WpfColorFontDialog
 
         private void SyncFontSize()
         {
-            double fontSize = this.selectedFont.Size;
-            foreach (ListBoxItem item in (IEnumerable)this.colorFontChooser.lstFontSizes.Items)
-            {
-                if (double.Parse(item.Content.ToString()) != fontSize)
-                {
-                    continue;
-                }
-                item.IsSelected = true;
-                break;
-            }
+            double fontSize = this._selectedFont.Size;
+            this.colorFontChooser.lstFontSizes.ItemsSource = FontSizes;
+            this.colorFontChooser.tbFontSize.Text = fontSize.ToString();
         }
 
         private void SyncFontTypeface()
         {
-            string fontTypeFaceSb = FontInfo.TypefaceToString(this.selectedFont.Typeface);
+            string fontTypeFaceSb = FontInfo.TypefaceToString(this._selectedFont.Typeface);
             int idx = 0;
             foreach (object item in (IEnumerable)this.colorFontChooser.lstTypefaces.Items)
             {
@@ -101,6 +109,7 @@ namespace WpfColorFontDialog
                 idx++;
             }
             this.colorFontChooser.lstTypefaces.SelectedIndex = idx;
+            this.colorFontChooser.lstTypefaces.ScrollIntoView(this.colorFontChooser.lstTypefaces.SelectedItem);
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
