@@ -6,10 +6,17 @@ Available on [NuGet](http://www.nuget.org/packages/WpfColorFontDialog/)
 
 usage:
           
-          //We can pass a bool to choose if we preview the font directly in the list of fonts.
+            //We can pass a bool to choose if we preview the font directly in the list of fonts.
             Bool previewFontInFontList = true;
-            ColorFontDialog dialog = new ColorFontDialog(previewFontInFontList);
+            //True to allow user to input arbitrary font sizes. False to only allow predtermined sizes
+            Bool allowArbitraryFontSizes = true; 
+            
+            
+            ColorFontDialog dialog = new ColorFontDialog(previewFontInFontList,allowArbitraryFontSizes);
             dialog.Font = FontInfo.GetControlFont(MyTextBox);
+            
+            //Optional custom allowed size range
+            dialog.FontSizes = new int[] { 10, 12, 14, 16, 18, 20, 22 };
             
             if (dialog.ShowDialog() == true)
             {
