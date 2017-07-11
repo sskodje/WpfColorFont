@@ -45,9 +45,9 @@
         <Grid DataContext="{StaticResource familyCollection}"
               Margin="0">
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition Height="70" />
-                <RowDefinition Height="70" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250" />
@@ -140,6 +140,7 @@
             </GroupBox>
             <GroupBox Grid.Column="1"
                       Grid.ColumnSpan="2"
+                      x:Name="groupBoxColorPicker"
                       Grid.Row="2">
                 <GroupBox.Header>
                     <TextBlock Text="Font Color"

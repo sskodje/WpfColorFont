@@ -29,6 +29,17 @@ namespace WpfColorFontDialog
 
 
 
+        public bool ShowColorPicker
+        {
+            get { return (bool)GetValue(ShowColorPickerProperty); }
+            set { SetValue(ShowColorPickerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowColorPicker.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowColorPickerProperty =
+            DependencyProperty.Register("ShowColorPicker", typeof(bool), typeof(ColorFontChooser), new PropertyMetadata(true, ShowColorPickerPropertyCallback));
+
+
         public bool AllowArbitraryFontSizes
         {
             get { return (bool)GetValue(AllowArbitraryFontSizesProperty); }
@@ -54,6 +65,9 @@ namespace WpfColorFontDialog
         public ColorFontChooser()
         {
             InitializeComponent();
+            this.groupBoxColorPicker.Visibility = ShowColorPicker ? Visibility.Visible : Visibility.Collapsed;
+            this.tbFontSize.IsEnabled = AllowArbitraryFontSizes;
+            lstFamily.ItemTemplate = PreviewFontInFontList ? (DataTemplate)Resources["fontFamilyData"] : (DataTemplate)Resources["fontFamilyDataWithoutPreview"];
         }
         private static void PreviewFontInFontListPropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -70,11 +84,21 @@ namespace WpfColorFontDialog
             ColorFontChooser chooser = d as ColorFontChooser;
             if (e.NewValue == null)
                 return;
-            if ((bool)e.NewValue == true)
-                chooser.tbFontSize.IsEnabled = true;
-            else
-                chooser.tbFontSize.IsEnabled = false;
+
+            chooser.tbFontSize.IsEnabled = (bool)e.NewValue;
+
         }
+        private static void ShowColorPickerPropertyCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ColorFontChooser chooser = d as ColorFontChooser;
+            if (e.NewValue == null)
+                return;
+            if ((bool)e.NewValue == true)
+                chooser.groupBoxColorPicker.Visibility = Visibility.Visible;
+            else
+                chooser.groupBoxColorPicker.Visibility = Visibility.Collapsed;
+        }
+
         private void colorPicker_ColorChanged(object sender, RoutedEventArgs e)
         {
             this.txtSampleText.Foreground = this.colorPicker.SelectedColor.Brush;

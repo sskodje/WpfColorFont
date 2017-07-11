@@ -33,24 +33,25 @@ namespace WpfColorFontDialog
             }
         }
 
-        private int[] _defaultFontSizes = { 8, 9, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72, 96 };
+        private int[] _defaultFontSizes = { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72, 96 };
         private int[] _fontSizes = null;
         public int[] FontSizes
         {
             get
             {
-                return _fontSizes??_defaultFontSizes;
+                return _fontSizes ?? _defaultFontSizes;
             }
             set
             {
                 _fontSizes = value;
             }
         }
-        public ColorFontDialog(bool previewFontInFontList=true, bool allowArbitraryFontSizes=true)
+        public ColorFontDialog(bool previewFontInFontList = true, bool allowArbitraryFontSizes = true, bool showColorPicker = true)
         {
             InitializeComponent();
             this.colorFontChooser.PreviewFontInFontList = previewFontInFontList;
             this.colorFontChooser.AllowArbitraryFontSizes = allowArbitraryFontSizes;
+            this.colorFontChooser.ShowColorPicker = showColorPicker;
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
@@ -70,7 +71,7 @@ namespace WpfColorFontDialog
         private void SyncFontName()
         {
             string fontFamilyName = this._selectedFont.Family.Source;
-            bool foundMatch=false;
+            bool foundMatch = false;
             int idx = 0;
             foreach (object item in (IEnumerable)this.colorFontChooser.lstFamily.Items)
             {
@@ -81,7 +82,7 @@ namespace WpfColorFontDialog
                 }
                 idx++;
             }
-            if(!foundMatch)
+            if (!foundMatch)
             {
                 idx = 0;
             }
