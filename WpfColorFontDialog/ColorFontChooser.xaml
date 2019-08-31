@@ -11,9 +11,8 @@
              xmlns:local="clr-namespace:WpfColorFontDialog"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:sysCollection="clr-namespace:System.Collections;assembly=mscorlib">
-    <Grid>
-        <Grid.Resources>
-            <local:FontValueConverter x:Key="FontValueConverter" />
+    <UserControl.Resources>
+        <local:FontValueConverter x:Key="FontValueConverter" />
             <DataTemplate x:Key="fontFamilyData">
                 <TextBlock TextBlock.FontSize="16"
                            Text="{Binding Converter={StaticResource FontValueConverter}}"
@@ -42,7 +41,8 @@
                 </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
             <local:FontSizeListBoxItemToDoubleConverter x:Key="FontSizeListBoxItemToDoubleConverter" />
-        </Grid.Resources>
+    </UserControl.Resources>
+    <Grid>
         <Grid DataContext="{StaticResource familyCollection}"
               Margin="0">
             <Grid.RowDefinitions>
