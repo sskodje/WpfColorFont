@@ -11,16 +11,16 @@
              xmlns:local="clr-namespace:WpfColorFontDialog"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:sysCollection="clr-namespace:System.Collections;assembly=mscorlib">
-    <Grid>
-        <Grid.Resources>
+    <UserControl.Resources>
+        <local:FontValueConverter x:Key="FontValueConverter" />
             <DataTemplate x:Key="fontFamilyData">
                 <TextBlock TextBlock.FontSize="16"
-                           Text="{Binding Source}"
+                           Text="{Binding Converter={StaticResource FontValueConverter}}"
                            TextBlock.FontFamily="{Binding}"
                            ToolTip="{Binding Source}" />
             </DataTemplate>
             <DataTemplate x:Key="fontFamilyDataWithoutPreview">
-                <TextBlock Text="{Binding Source}"
+                <TextBlock Text="{Binding Converter={StaticResource FontValueConverter}}"
                            ToolTip="{Binding Source}" />
             </DataTemplate>
             <DataTemplate x:Key="{DataTemplateKey {x:Type FamilyTypeface}}"
@@ -41,7 +41,8 @@
                 </CollectionViewSource.SortDescriptions>
             </CollectionViewSource>
             <local:FontSizeListBoxItemToDoubleConverter x:Key="FontSizeListBoxItemToDoubleConverter" />
-        </Grid.Resources>
+    </UserControl.Resources>
+    <Grid>
         <Grid DataContext="{StaticResource familyCollection}"
               Margin="0">
             <Grid.RowDefinitions>
@@ -56,7 +57,7 @@
             </Grid.ColumnDefinitions>
             <GroupBox Grid.RowSpan="3">
                 <GroupBox.Header>
-                    <TextBlock Text="Font Family"
+					<TextBlock Text="{DynamicResource FontFamily}"
                                FontStyle="Italic" />
                 </GroupBox.Header>
                 <Grid>
@@ -77,7 +78,7 @@
             </GroupBox>
             <GroupBox Grid.Column="1">
                 <GroupBox.Header>
-                    <TextBlock Text="Style - Weight"
+                    <TextBlock Text="{DynamicResource StyleWeight}"
                                FontStyle="Italic" />
                 </GroupBox.Header>
                 <ListBox Name="lstTypefaces"
@@ -90,7 +91,7 @@
             </GroupBox>
             <GroupBox Grid.Column="2">
                 <GroupBox.Header>
-                    <TextBlock Text="Font Size" />
+                    <TextBlock Text="{DynamicResource FontSize}" />
                 </GroupBox.Header>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -119,7 +120,7 @@
                       Grid.Column="1"
                       Margin="5,0,0,0">
                 <GroupBox.Header>
-                    <TextBlock Text="Sample Text"
+                    <TextBlock Text="{DynamicResource SampleText}"
                                FontStyle="Italic" />
                 </GroupBox.Header>
                 <TextBox Name="txtSampleText"
@@ -143,7 +144,7 @@
                       x:Name="groupBoxColorPicker"
                       Grid.Row="2">
                 <GroupBox.Header>
-                    <TextBlock Text="Font Color"
+                    <TextBlock Text="{DynamicResource FontColor}"
                                FontStyle="Italic" />
                 </GroupBox.Header>
                 <local:ColorPicker x:Name="colorPicker"
