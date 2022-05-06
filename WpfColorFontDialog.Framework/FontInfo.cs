@@ -102,6 +102,8 @@ namespace WpfColorFontDialog
 			control.FontSize = font.Size;
 			control.FontStyle = font.Style;
 			control.FontStretch = font.Stretch;
+			control.Background = font.BackgroundBrushColor;
+			control.Foreground = font.BrushColor;
 			control.FontWeight = font.Weight;
 			control.Foreground = font.BrushColor;
 		}
