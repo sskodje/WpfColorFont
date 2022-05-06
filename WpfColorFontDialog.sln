@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfColorFontDialog", "WpfColorFontDialog\WpfColorFontDialog.csproj", "{6C301B62-352A-4053-9B06-E148A85D47AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfColorFontDialog", "WpfColorFontDialog\WpfColorFontDialog.csproj", "{6C301B62-352A-4053-9B06-E148A85D47AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{782ECF2F-4758-4292-8594-AF401511FFB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{782ECF2F-4758-4292-8594-AF401511FFB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfColorFontDialog.Framework", "WpfColorFontDialog.Framework\WpfColorFontDialog.Framework.csproj", "{98328282-751A-4008-93B3-3D3FC359DF1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject.Framework", "TestProject.Framework\TestProject.Framework.csproj", "{C685D4E2-FB0D-4537-99FC-AE5646CA0491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +25,19 @@ Global
 		{782ECF2F-4758-4292-8594-AF401511FFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{782ECF2F-4758-4292-8594-AF401511FFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{782ECF2F-4758-4292-8594-AF401511FFB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98328282-751A-4008-93B3-3D3FC359DF1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98328282-751A-4008-93B3-3D3FC359DF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98328282-751A-4008-93B3-3D3FC359DF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98328282-751A-4008-93B3-3D3FC359DF1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C685D4E2-FB0D-4537-99FC-AE5646CA0491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C685D4E2-FB0D-4537-99FC-AE5646CA0491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C685D4E2-FB0D-4537-99FC-AE5646CA0491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C685D4E2-FB0D-4537-99FC-AE5646CA0491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B405621-0B6C-42C6-B518-81B0051EA405}
 	EndGlobalSection
 EndGlobal
