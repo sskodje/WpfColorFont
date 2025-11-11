@@ -7,7 +7,7 @@
     <AssemblyName>WpfColorFontDialog</AssemblyName>
     <RootNamespace>WpfColorFontDialog</RootNamespace>
     <Copyright>Copyright ©  2015</Copyright>
-    <Version>1.0.8.1</Version>
+    <Version>1.0.9.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReleaseNotes>Added .Net 6.0 support.</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/sskodje/WpfColorFont/</RepositoryUrl>
